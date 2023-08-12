@@ -1,9 +1,10 @@
-import Image from 'next/image'
+//app/page.tsx
+import { UserButton } from "@clerk/nextjs";
 
 export default function Home() {
   return (
-    <main>
-      Threads
-    </main>
+    <div>
+      <UserButton afterSignOutUrl="/"/>
+    </div>
   )
 }
