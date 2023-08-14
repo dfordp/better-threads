@@ -21,6 +21,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { UserValidation } from "@/lib/validations/user";
 import { isBase64Image } from "@/lib/utils";
 import { useUploadThing } from "@/lib/uploadThing";
+import { updateUser } from "@/lib/actions/user.actions";
 
 interface Props {
   user: {
@@ -54,14 +55,28 @@ const AccountProfile = ({user , btnTitle}:Props) => {
     const blob = values.profile_photo;
 
     const hasImageChanged = isBase64Image(blob);
-    const imgRes = await startUpload(files);
+    if (hasImageChanged) {
+      const imgRes = await startUpload(files);
 
-    if (imgRes && imgRes[0].fileUrl) {
-      values.profile_photo = imgRes[0].fileUrl;
+      if (imgRes && imgRes[0].fileUrl) {
+        values.profile_photo = imgRes[0].fileUrl;
+      }
     }
 
-    //update userProfile
-    
+    await updateUser({
+      name: values.name,
+      path: pathname,
+      username: values.username,
+      userId: user.id,
+      bio: values.bio,
+      image: values.profile_photo,
+    });
+
+    if (pathname === "/profile/edit") {
+      router.back();
+    } else {
+      router.push("/");
+    }
   }
 
   
