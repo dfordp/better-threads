@@ -6,7 +6,7 @@ import { dark } from "@clerk/themes";
 
 
 
-import TopBar from '@/components/shared/Topbar';
+import TopBar from '@/components/shared/TopBar';
 import LeftSideBar from '@/components/shared/LeftSideBar';
 import RightSideBar from '@/components/shared/RightSideBar';
 import BottomBar from '@/components/shared/BottomBar';
